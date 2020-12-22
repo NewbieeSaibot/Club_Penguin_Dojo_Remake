@@ -2,13 +2,9 @@ import pygame
 import globals
 from scene_factory import SceneFactory
 
-# Constants
-MAIN_SCREEN_SIZE = (500, 500)
-GAME_RHYTHM = 65
-
 # Variables
 clock = pygame.time.Clock()
-scenes = [SceneFactory.instantiate_menu(), SceneFactory.instantiate_game()]
+scenes = [SceneFactory.menu(), SceneFactory.game(), SceneFactory.choose_deck()]
 
 
 def update_game(main_window):
@@ -25,14 +21,15 @@ def update_game(main_window):
 
 def main_loop():
     global clock
-    pygame.init()
+    pygame.mixer.music.load("./data/sounds/backgrounds/theme.mp3")
+    pygame.mixer.music.play(-1)
 
-    main_window = pygame.display.set_mode(MAIN_SCREEN_SIZE)
-    pygame.display.set_caption("First Game")
+    main_window = pygame.display.set_mode(globals.MAIN_SCREEN_SIZE)
+    pygame.display.set_caption(globals.GAME_NAME)
 
     run = True
     while run:
-        clock.tick(GAME_RHYTHM)
+        clock.tick(globals.GAME_RHYTHM)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -45,4 +42,5 @@ def main_loop():
 
 
 if __name__ == '__main__':
+    pygame.init()
     main_loop()
