@@ -1,10 +1,10 @@
 import pygame
-import globals
-from scene_factory import SceneFactory
+from game import globals
+from game.scenes import game, menu, shop
 
 # Variables
 clock = pygame.time.Clock()
-scenes = [SceneFactory.menu(), SceneFactory.game(), SceneFactory.choose_deck()]
+scenes = [menu.Menu(), game.Game(), shop.Shop()]
 
 
 def update_game(main_window):
@@ -21,7 +21,7 @@ def update_game(main_window):
 
 def main_loop():
     global clock
-    pygame.mixer.music.load("./data/sounds/backgrounds/theme.mp3")
+    pygame.mixer.music.load("./game/data/sounds/backgrounds/theme.mp3")
     pygame.mixer.music.play(-1)
 
     main_window = pygame.display.set_mode(globals.MAIN_SCREEN_SIZE)
