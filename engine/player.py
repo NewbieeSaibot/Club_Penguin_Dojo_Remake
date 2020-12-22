@@ -1,6 +1,5 @@
-import pygame
-from render_able_object import RenderAbleObject
-from interact_able_object import InteractAbleObject
+from engine.render_able_object import RenderAbleObject
+from engine.interact_able_object import InteractAbleObject
 
 
 class Player(RenderAbleObject, InteractAbleObject):
@@ -10,10 +9,6 @@ class Player(RenderAbleObject, InteractAbleObject):
         # Variables
         self.deck = []
         self.hand = []
-
-    def draw(self, window):
-        pygame.draw.rect(window, (255, 255, 255), (self.current_pos[0], self.current_pos[1],
-                                                   self.SIZE[0], self.SIZE[1]))
 
     def interact(self, keys, mouse):
         pass

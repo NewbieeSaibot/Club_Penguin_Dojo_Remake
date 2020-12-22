@@ -1,7 +1,7 @@
 import pygame
 from threading import Thread
-from render_able_object import RenderAbleObject
-from interact_able_object import InteractAbleObject
+from engine.render_able_object import RenderAbleObject
+from engine.interact_able_object import InteractAbleObject
 
 
 class Button(RenderAbleObject, InteractAbleObject):
@@ -10,6 +10,8 @@ class Button(RenderAbleObject, InteractAbleObject):
         self.function = function
         self.cool_down = cool_down
         self.cool_down_current = True
+        self.image_path = None
+        self.image = None
 
     def interact(self, keys, mouse):
         if mouse.get_pressed()[0] and self.is_inside(mouse.get_pos()[0], mouse.get_pos()[1]) and self.cool_down_current:
@@ -17,10 +19,6 @@ class Button(RenderAbleObject, InteractAbleObject):
             self.function()
             timer = Thread(target=self.wait)
             timer.start()
-
-    def draw(self, window):
-        pygame.draw.rect(window, (255, 255, 255), (self.current_pos[0], self.current_pos[1],
-                                                   self.SIZE[0], self.SIZE[1]))
 
     def wait(self):
         clock = pygame.time.Clock()
