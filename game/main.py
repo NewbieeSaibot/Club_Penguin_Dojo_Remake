@@ -1,10 +1,8 @@
 import pygame
 from game import globals
-from game.scenes import game, menu, shop
 
 # Variables
 clock = pygame.time.Clock()
-scenes = [menu.Menu(), game.Game(), shop.Shop()]
 
 
 def update_game(main_window):
@@ -12,8 +10,8 @@ def update_game(main_window):
     # Starts with a black window and render the "layers"
     main_window.fill((0, 0, 0))
 
-    scenes[globals.active_scene].input_reactions()
-    scenes[globals.active_scene].render(main_window)
+    globals.scenes[globals.active_scene].input_reactions()
+    globals.scenes[globals.active_scene].render(main_window)
 
     # At the end of the renders just update the screen
     pygame.display.update()

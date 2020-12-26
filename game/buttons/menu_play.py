@@ -10,3 +10,4 @@ class MenuPlay(Button):
     @staticmethod
     def go_to_game():
         globals.active_scene = 1
+        globals.scenes[globals.active_scene].initialize_game()
