@@ -18,15 +18,34 @@ class Card(RenderAbleObject, InteractAbleObject):
         self.interact_able = False
         self.cool_down = cool_down
         self.cool_down_current = True
+        self.is_selected = False
 
     def interact(self, keys, mouse):
         if self.interact_able:
             if mouse.get_pressed()[0] and self.is_inside(mouse.get_pos()[0], mouse.get_pos()[1]):
                 if self.player is not None:
                     self.cool_down_current = False
+                    if self.player.selected_card is not None:
+                        self.player.selected_card.is_selected = False
+
+                    self.is_selected = True
                     self.player.selected_card = self
                     timer = Thread(target=self.wait)
                     timer.start()
+
+    def draw(self, window):
+        if self.visible is not True:
+            return
+
+        if self.image_path is not None:
+            if self.image is None:
+                image = pygame.image.load(self.image_path)
+                self.image = pygame.transform.smoothscale(image, (self.SIZE[0], self.SIZE[1]))
+
+            if not self.is_selected:
+                window.blit(self.image, (self.current_pos[0], self.current_pos[1]))
+            else:
+                window.blit(self.image, (self.current_pos[0], self.current_pos[1] - 20))
 
     def wait(self):
         clock = pygame.time.Clock()
