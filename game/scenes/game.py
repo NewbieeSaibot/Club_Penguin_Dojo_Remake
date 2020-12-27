@@ -22,7 +22,7 @@ class Game(Scene):
         self.stop_thread = False
         self.score = 0
         self.round = 0
-        self.round_time = 1
+        self.round_time = 5
 
     def initialize_game(self):
         player = Player()
@@ -81,6 +81,7 @@ class Game(Scene):
         self.player2.selected_card = self.player2.hand[random.randint(0, len(self.player.hand)-1)]
 
         # re pos the selected cards to the center of dojo
+        self.player.selected_card.is_selected = False
         self.player.selected_card.current_pos[0] = 350
         self.player.selected_card.current_pos[1] = 200
 
